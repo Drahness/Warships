@@ -8,4 +8,5 @@ public interface ILoader {
 	public Movement[] loadMovements();
 	public Boat[] loadBoats();
 	public Boat[] loadBoardSafe();
+	
 }
