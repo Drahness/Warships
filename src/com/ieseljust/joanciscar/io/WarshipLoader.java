@@ -1,10 +1,12 @@
-package com.ieseljust.joanciscar;
+package com.ieseljust.joanciscar.io;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import com.ieseljust.joanciscar.Movement;
+import com.ieseljust.joanciscar.WarshipMain;
 import com.ieseljust.joanciscar.configuration.WarshipConfigurationProperties;
 
 import pkg2020_ad_p1_warship.Board;

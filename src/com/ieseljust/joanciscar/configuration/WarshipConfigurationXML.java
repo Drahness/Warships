@@ -7,8 +7,12 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 
+import com.sun.java.util.jar.pack.Attribute.Layout.Element;
+
 public class WarshipConfigurationXML extends WarshipAbstractFileConfiguration {
 	private static WarshipConfigurationXML instance;
+	private Element configuracion;
+	
 	
 	private Document dom;
 	public static WarshipConfigurationXML getInstance() {
@@ -48,7 +52,7 @@ public class WarshipConfigurationXML extends WarshipAbstractFileConfiguration {
 	public void setDefault() {
 		try {
 			dom = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-			dom.create
+			dom.createElement("configuracion");
 		}
 		catch(ParserConfigurationException e) {
 			e.printStackTrace(); // Creo que nunca llegara aqui, no?

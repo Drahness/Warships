@@ -3,6 +3,8 @@ package com.ieseljust.joanciscar;
 import java.io.IOException;
 
 import com.ieseljust.joanciscar.configuration.WarshipConfigurationProperties;
+import com.ieseljust.joanciscar.io.WarshipLoader;
+import com.ieseljust.joanciscar.io.WarshipPersistor;
 
 import Utils.ConsoleColors;
 import Utils.Leer;

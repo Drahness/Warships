@@ -1,4 +1,4 @@
-package com.ieseljust.joanciscar;
+package com.ieseljust.joanciscar.io;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.ieseljust.joanciscar.Movement;
+
 import pkg2020_ad_p1_warship.Board;
 import pkg2020_ad_p1_warship.Boat;
 import pkg2020_ad_p1_warship.Cell;
