@@ -12,8 +12,8 @@ public interface IConfiguration {
 	public static final boolean DEFAULT_SAVE_MOVS = true;
 	
 	public void setDefault();
-	public void load() throws Exception;
-	public void save() throws Exception;
+	public void loadConfiguration() throws Exception;
+	public void saveConfiguration() throws Exception;
 	/**
 	 * With user interaction.
 	 */

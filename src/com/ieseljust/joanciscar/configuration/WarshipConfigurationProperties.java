@@ -54,11 +54,11 @@ public class WarshipConfigurationProperties extends WarshipAbstractFileConfigura
 		return instance;
 	}
 	
-	public void load() throws FileNotFoundException, IOException {
+	public void loadConfiguration() throws FileNotFoundException, IOException {
 		configuration.load(new FileInputStream(getFileConf()));
 	}
 	
-	public void save() throws FileNotFoundException, IOException {
+	public void saveConfiguration() throws FileNotFoundException, IOException {
 		configuration.store(new FileOutputStream(getFileConf()), String.format("Configuracion creada el %s",new Date()));
 	}
 	public void set() {

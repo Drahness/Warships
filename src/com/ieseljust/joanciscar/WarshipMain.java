@@ -105,7 +105,7 @@ public class WarshipMain {
 			break;
 		case 2:
 			try {
-				configuration.save();
+				configuration.saveConfiguration();
 			} catch (IOException e1) {
 				System.out.println(ConsoleColors.printError("Error al guardar el fichero de propiedades."));
 				e1.printStackTrace();
@@ -113,7 +113,7 @@ public class WarshipMain {
 			break;
 		case 3:
 			try {
-				configuration.load();
+				configuration.loadConfiguration();
 			} catch (IOException e) {
 				System.out.println(ConsoleColors.printError("Error al cargar el fichero de configuracion."));
 				e.printStackTrace();

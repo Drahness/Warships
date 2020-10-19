@@ -15,13 +15,13 @@ public class IOProxy implements ILoader, IPersistor ,IConfiguration {
 	}
 
 	@Override
-	public void load() throws Exception {
+	public void loadConfiguration() throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void save() throws Exception {
+	public void saveConfiguration() throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
