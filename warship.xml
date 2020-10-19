@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Warships><Config><save_movements>true</save_movements><max_jugadas>50</max_jugadas><num_boats>5</num_boats><board_tam>10</board_tam></Config><Moves><Move id="50"><row>2</row><col>5</col><result>3</result></Move></Moves><Boats/></Warships>
