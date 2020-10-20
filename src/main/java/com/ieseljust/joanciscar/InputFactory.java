@@ -4,13 +4,14 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.json.JSONException;
 import org.xml.sax.SAXException;
 
 import Utils.Leer;
 
 public class InputFactory {
 	
-	public IWarshipInput create() throws NumberFormatException, IOException, SAXException, ParserConfigurationException {
+	public IWarshipInput create() throws NumberFormatException, IOException, SAXException, ParserConfigurationException, JSONException {
 		System.out.println("Como van a entrar las tiradas?");
 		System.out.println("\t1 - Manualmente");
 		System.out.println("\t2 - Ordenador");

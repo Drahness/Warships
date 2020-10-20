@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.json.JSONException;
 import org.xml.sax.SAXException;
 
 public interface IConfiguration {
@@ -19,9 +20,8 @@ public interface IConfiguration {
 	public static final int DEFAULT_NUMBER_BOATS = 5;
 	public static final boolean DEFAULT_SAVE_MOVS = true;
 	
-	public void setDefault();
-	public void loadConfiguration() throws SAXException, IOException, ParserConfigurationException ;
-	public void saveConfiguration() throws FileNotFoundException, IOException, TransformerException, SAXException, ParserConfigurationException;
+	public void loadConfiguration() throws SAXException, IOException, ParserConfigurationException, JSONException ;
+	public void saveConfiguration() throws FileNotFoundException, IOException, TransformerException, SAXException, ParserConfigurationException, JSONException;
 	/**
 	 * With user interaction.
 	 */
@@ -30,5 +30,5 @@ public interface IConfiguration {
 	public int getCurrentBoats();
 	public int getCurrentMaxJugadas();
 	public boolean getCurrentGuardarMovimientos();
-	public void put(String key, String value);
+	public void setCurrentBounds(int i);
 }

@@ -27,10 +27,10 @@ public class WarshipConfigurationProperties extends WarshipAbstractFileConfigura
 	}
 	public void setDefault() {
 		configuration = new Properties();
-		put(FlagsConfiguration.FLAG_NUMERO_BOATS, Integer.toString(DEFAULT_NUMBER_BOATS));
-		put(FlagsConfiguration.FLAG_MAX_JUGADAS, Integer.toString(DEFAULT_TRIES));
-		put(FlagsConfiguration.FLAG_TAMAÑO_BOARD, Integer.toString(DEFAULT_BOUNDS));
-		put(FlagsConfiguration.FLAG_GUARDAR_MOVIMIENTOS, Boolean.toString(DEFAULT_SAVE_MOVS));
+		configuration.put(FlagsConfiguration.FLAG_NUMERO_BOATS, Integer.toString(DEFAULT_NUMBER_BOATS));
+		configuration.put(FlagsConfiguration.FLAG_MAX_JUGADAS, Integer.toString(DEFAULT_TRIES));
+		configuration.put(FlagsConfiguration.FLAG_TAMAÑO_BOARD, Integer.toString(DEFAULT_BOUNDS));
+		configuration.put(FlagsConfiguration.FLAG_GUARDAR_MOVIMIENTOS, Boolean.toString(DEFAULT_SAVE_MOVS));
 	}
 
 	public static WarshipConfigurationProperties getInstance() {
@@ -70,21 +70,21 @@ public class WarshipConfigurationProperties extends WarshipAbstractFileConfigura
 		System.out.println("\t5- Guardar movimientos? Actual: "+getCurrentGuardarMovimientos());
 		switch(Leer.leerEntero("Selecciona: ",6)-1) {
 		case 1: 
-			put(FlagsConfiguration.FLAG_NUMERO_BOATS, Integer.toString(Leer.leerEntero("Seleccion nuevo numero de barcos: ", getCurrentBounds()/2)));
+			configuration.put(FlagsConfiguration.FLAG_NUMERO_BOATS, Integer.toString(Leer.leerEntero("Seleccion nuevo numero de barcos: ", getCurrentBounds()/2)));
 			break;
 		case 2: 
-			put(FlagsConfiguration.FLAG_MAX_JUGADAS, Integer.toString(Leer.leerEntero("Seleccion nuevo maximo jugadas: ", getCurrentBoats()*5,getCurrentBounds()/2+1)));
+			configuration.put(FlagsConfiguration.FLAG_MAX_JUGADAS, Integer.toString(Leer.leerEntero("Seleccion nuevo maximo jugadas: ", getCurrentBoats()*5,getCurrentBounds()/2+1)));
 			break;
 		case 3:
-			put(FlagsConfiguration.FLAG_TAMAÑO_BOARD, Integer.toString(Leer.leerEntero("Seleccion nuevo tamaño de tablero: ", 5, 1000)));
+			configuration.put(FlagsConfiguration.FLAG_TAMAÑO_BOARD, Integer.toString(Leer.leerEntero("Seleccion nuevo tamaño de tablero: ", 5, 1000)));
 			break;
 		case 4:
-			put(FlagsConfiguration.FLAG_GUARDAR_MOVIMIENTOS, Boolean.toString(!getCurrentGuardarMovimientos()));
+			configuration.put(FlagsConfiguration.FLAG_GUARDAR_MOVIMIENTOS, Boolean.toString(!getCurrentGuardarMovimientos()));
 			break;
 		default:
-			put(FlagsConfiguration.FLAG_TAMAÑO_BOARD, Integer.toString(Leer.leerEntero("Seleccion nuevo tamaño de tablero: ", 5, 100)));
-			put(FlagsConfiguration.FLAG_NUMERO_BOATS, Integer.toString(Leer.leerEntero("Seleccion nuevo numero de barcos: ", 1 ,getCurrentBounds()/2+1)));
-			put(FlagsConfiguration.FLAG_MAX_JUGADAS, Integer.toString(Leer.leerEntero("Seleccion nuevo maximo jugadas: ", getCurrentBoats()*5,getCurrentBounds()*getCurrentBounds()/2+1)));
+			configuration.put(FlagsConfiguration.FLAG_TAMAÑO_BOARD, Integer.toString(Leer.leerEntero("Seleccion nuevo tamaño de tablero: ", 5, 100)));
+			configuration.put(FlagsConfiguration.FLAG_NUMERO_BOATS, Integer.toString(Leer.leerEntero("Seleccion nuevo numero de barcos: ", 1 ,getCurrentBounds()/2+1)));
+			configuration.put(FlagsConfiguration.FLAG_MAX_JUGADAS, Integer.toString(Leer.leerEntero("Seleccion nuevo maximo jugadas: ", getCurrentBoats()*5,getCurrentBounds()*getCurrentBounds()/2+1)));
 		}
 		if(Leer.leerBoolean("¿Quieres seguir configurando? S/N: ")) {
 			set();
@@ -103,8 +103,5 @@ public class WarshipConfigurationProperties extends WarshipAbstractFileConfigura
 	public boolean getCurrentGuardarMovimientos() {
 		return Boolean.parseBoolean((String) configuration.get(FlagsConfiguration.FLAG_GUARDAR_MOVIMIENTOS));
 	}
-	@Override
-	public void put(String key, String value) {
-		configuration.put(key, value);
-	}
+
  }

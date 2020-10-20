@@ -78,7 +78,7 @@ public class WarshipLoader implements ILoader {
 	
 	public Board loadBoardSafe() throws IOException, NumberFormatException {
 		Boat[] boats = loadBoats();
-		WarshipMain.configuration.put(FlagsConfiguration.FLAG_TAMAÑO_BOARD,""+ Boat.getMaxCoordOfBoats(boats));
+		WarshipMain.configuration.setCurrentBounds(Boat.getMaxCoordOfBoats(boats));
 		Board board = new Board(boats);
 		return board;
 	}

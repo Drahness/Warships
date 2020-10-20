@@ -6,9 +6,11 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.json.JSONException;
 import org.xml.sax.SAXException;
 
 import com.ieseljust.joanciscar.configuration.IConfiguration;
+import com.ieseljust.joanciscar.configuration.WarshipConfigurationJSON;
 import com.ieseljust.joanciscar.configuration.WarshipConfigurationXML;
 import com.ieseljust.joanciscar.io.ILoader;
 import com.ieseljust.joanciscar.io.IPersistor;
@@ -23,9 +25,9 @@ public class WarshipMain {
 	public static final WarshipPersistor persistor = WarshipPersistor.getInstance();*/
 	
 	
-	public static final IConfiguration configuration = WarshipConfigurationXML.getInstance();
-	public static final ILoader loader = WarshipConfigurationXML.getInstance();
-	public static final IPersistor persistor = WarshipConfigurationXML.getInstance();
+	public static final IConfiguration configuration = WarshipConfigurationJSON.getInstance();
+	public static final ILoader loader = WarshipConfigurationJSON.getInstance();
+	public static final IPersistor persistor = WarshipConfigurationJSON.getInstance();
 	
 	public static Board board;
 	public static IWarshipInput input;
@@ -42,7 +44,8 @@ public class WarshipMain {
 		System.out.println("\t2. Tablero:");
 		System.out.println("\t3. Jugar:");
 		System.out.println("\t4. Salir:");
-		int opcio = Leer.leerEntero("Seleciona: ",5)-1;
+		System.out.println("\t5. Consultar archivo clase_warships.xml:");
+		int opcio = Leer.leerEntero("Seleciona: ",6)-1;
 		switch(opcio) {
 		case 0:
 			menuConfiguraciones();
@@ -52,6 +55,9 @@ public class WarshipMain {
 			break;
 		case 2:
 			menuJugar();
+			break;
+		case 4:
+			new Consultor("clase_warships.xml").loopPrintInfo();
 			break;
 		default:
 			System.exit(0);
@@ -84,6 +90,9 @@ public class WarshipMain {
 					} catch (SAXException | ParserConfigurationException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
+					} catch (JSONException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 				}
 			} catch (IOException e) {
@@ -91,6 +100,9 @@ public class WarshipMain {
 				e.printStackTrace();
 			} catch (SAXException | ParserConfigurationException e) {
 				System.out.println("Error al parsear el fichero.");
+				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 			
@@ -102,6 +114,9 @@ public class WarshipMain {
 				System.out.println("Error al guardar el fichero.");
 				//e.printStackTrace();
 			} catch (SAXException | ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -131,6 +146,9 @@ public class WarshipMain {
 			} catch (SAXException | ParserConfigurationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			break;
 		case 3:
@@ -139,6 +157,9 @@ public class WarshipMain {
 			} catch (IOException e) {
 				System.out.println(ConsoleColors.printError("Error al cargar el fichero de configuracion."));
 			} catch (SAXException | ParserConfigurationException e) {
+				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -167,6 +188,9 @@ public class WarshipMain {
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
 			System.out.println("QUE HAS HECHO JOAN");
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -220,6 +244,9 @@ public class WarshipMain {
 					System.out.println(ConsoleColors.printError("Ha habido un error guardando el fichero de movimientos."));
 					e.printStackTrace();
 				} catch (SAXException | ParserConfigurationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

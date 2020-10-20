@@ -192,10 +192,16 @@ public class Boat {
 		return direccion;
 	}
 	public int getFilapos() {
+		if(cells == null) {
+			return filapos;
+		}
 		return cells[0].getRow();
 	}
 
 	public int getColumnapos() {
+		if(cells == null) {
+			return columnapos;
+		}
 		return cells[0].getColumn();
 	}
 	

@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Warship>
+    <Config version="1.0">
+        <board_dim>10</board_dim>
+        <boats_count>5</boats_count>
+        <max_moves>400</max_moves>
+    </Config>
+    <Boats>
+        <Boat id="0">
+            <Dimension>5</Dimension>
+            <Orientación>0</Orientación>
+            <Posición Column="1" Row="9"/>
+        </Boat>
+        <Boat id="1">
+            <Dimension>4</Dimension>
+            <Orientación>1</Orientación>
+            <Posición Column="9" Row="0"/>
+        </Boat>
+        <Boat id="2">
+            <Dimension>3</Dimension>
+            <Orientación>0</Orientación>
+            <Posición Column="0" Row="4"/>
+        </Boat>
+        <Boat id="3">
+            <Dimension>2</Dimension>
+            <Orientación>1</Orientación>
+            <Posición Column="3" Row="0"/>
+        </Boat>
+        <Boat id="4">
+            <Dimension>2</Dimension>
+            <Orientación>1</Orientación>
+            <Posición Column="1" Row="1"/>
+        </Boat>
+    </Boats>
+    <Moves>
+        <Move id="1">
+            <row>7</row>
+            <col>8</col>
+            <result>4</result>
+        </Move>
+        <Move id="2">
+            <row>0</row>
+            <col>4</col>
+            <result>4</result>
+        </Move>
+        <Move id="3">
+            <row>2</row>
+            <col>9</col>
+            <result>2</result>
+        </Move>
+        <Move id="4">
+            <row>3</row>
+            <col>7</col>
+            <result>4</result>
+        </Move>
+        <Move id="5">
+            <row>2</row>
+            <col>0</col>
+            <result>4</result>
+        </Move>
+        <Move id="6">
+            <row>1</row>
+            <col>8</col>
+            <result>4</result>
+        </Move>
+        <Move id="7">
+            <row>8</row>
+            <col>0</col>
+            <result>4</result>
+        </Move>
+        <Move id="8">
+            <row>1</row>
+            <col>4</col>
+            <result>4</result>
+        </Move>
+        <Move id="9">
+            <row>6</row>
+            <col>9</col>
+            <result>4</result>
+        </Move>
+        <Move id="10">
+            <row>4</row>
+            <col>5</col>
+            <result>4</result>
+        </Move>
+        <Move id="11">
+            <row>5</row>
+            <col>4</col>
+            <result>4</result>
+        </Move>
+        <Move id="12">
+            <row>9</row>
+            <col>9</col>
+            <result>4</result>
+        </Move>
+        <Move id="13">
+            <row>7</row>
+            <col>0</col>
+            <result>4</result>
+        </Move>
+        <Move id="14">
+            <row>0</row>
+            <col>8</col>
+            <result>4</result>
+        </Move>
+        <Move id="15">
+            <row>8</row>
+            <col>5</col>
+            <result>4</result>
+        </Move>
+        <Move id="16">
+            <row>3</row>
+            <col>3</col>
+            <result>4</result>
+        </Move>
+        <Move id="17">
+            <row>4</row>
+            <col>2</col>
+            <result>2</result>
+        </Move>
+        <Move id="18">
+            <row>9</row>
+            <col>5</col>
+            <result>2</result>
+        </Move>
+        <Move id="19">
+            <row>0</row>
+            <col>1</col>
+            <result>4</result>
+        </Move>
+        <Move id="20">
+            <row>8</row>
+            <col>6</col>
+            <result>4</result>
+        </Move>
+        <Move id="21">
+            <row>8</row>
+            <col>7</col>
+            <result>4</result>
+        </Move>
+        <Move id="22">
+            <row>1</row>
+            <col>7</col>
+            <result>4</result>
+        </Move>
+        <Move id="23">
+            <row>5</row>
+            <col>8</col>
+            <result>4</result>
+        </Move>
+        <Move id="24">
+            <row>9</row>
+            <col>4</col>
+            <result>2</result>
+        </Move>
+        <Move id="25">
+            <row>6</row>
+            <col>0</col>
+            <result>4</result>
+        </Move>
+        <Move id="26">
+            <row>2</row>
+            <col>2</col>
+            <result>4</result>
+        </Move>
+        <Move id="27">
+            <row>4</row>
+            <col>1</col>
+            <result>2</result>
+        </Move>
+        <Move id="28">
+            <row>5</row>
+            <col>3</col>
+            <result>4</result>
+        </Move>
+        <Move id="29">
+            <row>3</row>
+            <col>2</col>
+            <result>4</result>
+        </Move>
+        <Move id="30">
+            <row>5</row>
+            <col>2</col>
+            <result>4</result>
+        </Move>
+        <Move id="31">
+            <row>9</row>
+            <col>8</col>
+            <result>4</result>
+        </Move>
+        <Move id="32">
+            <row>2</row>
+            <col>3</col>
+            <result>4</result>
+        </Move>
+        <Move id="33">
+            <row>9</row>
+            <col>0</col>
+            <result>4</result>
+        </Move>
+        <Move id="34">
+            <row>9</row>
+            <col>2</col>
+            <result>2</result>
+        </Move>
+        <Move id="35">
+            <row>4</row>
+            <col>4</col>
+            <result>4</result>
+        </Move>
+        <Move id="36">
+            <row>2</row>
+            <col>6</col>
+            <result>4</result>
+        </Move>
+        <Move id="37">
+            <row>5</row>
+            <col>5</col>
+            <result>4</result>
+        </Move>
+        <Move id="38">
+            <row>8</row>
+            <col>8</col>
+            <result>4</result>
+        </Move>
+        <Move id="39">
+            <row>2</row>
+            <col>5</col>
+            <result>4</result>
+        </Move>
+        <Move id="40">
+            <row>5</row>
+            <col>7</col>
+            <result>4</result>
+        </Move>
+        <Move id="41">
+            <row>0</row>
+            <col>9</col>
+            <result>2</result>
+        </Move>
+        <Move id="42">
+            <row>1</row>
+            <col>6</col>
+            <result>4</result>
+        </Move>
+        <Move id="43">
+            <row>2</row>
+            <col>1</col>
+            <result>2</result>
+        </Move>
+        <Move id="44">
+            <row>0</row>
+            <col>3</col>
+            <result>2</result>
+        </Move>
+        <Move id="45">
+            <row>4</row>
+            <col>8</col>
+            <result>4</result>
+        </Move>
+        <Move id="46">
+            <row>4</row>
+            <col>0</col>
+            <result>3</result>
+        </Move>
+        <Move id="47">
+            <row>4</row>
+            <col>9</col>
+            <result>4</result>
+        </Move>
+        <Move id="48">
+            <row>6</row>
+            <col>3</col>
+            <result>4</result>
+        </Move>
+        <Move id="49">
+            <row>8</row>
+            <col>1</col>
+            <result>4</result>
+        </Move>
+        <Move id="50">
+            <row>6</row>
+            <col>5</col>
+            <result>4</result>
+        </Move>
+        <Move id="51">
+            <row>6</row>
+            <col>2</col>
+            <result>4</result>
+        </Move>
+        <Move id="52">
+            <row>7</row>
+            <col>6</col>
+            <result>4</result>
+        </Move>
+        <Move id="53">
+            <row>7</row>
+            <col>9</col>
+            <result>4</result>
+        </Move>
+        <Move id="54">
+            <row>1</row>
+            <col>9</col>
+            <result>2</result>
+        </Move>
+        <Move id="55">
+            <row>3</row>
+            <col>8</col>
+            <result>4</result>
+        </Move>
+        <Move id="56">
+            <row>3</row>
+            <col>9</col>
+            <result>3</result>
+        </Move>
+        <Move id="57">
+            <row>7</row>
+            <col>2</col>
+            <result>4</result>
+        </Move>
+        <Move id="58">
+            <row>1</row>
+            <col>2</col>
+            <result>4</result>
+        </Move>
+        <Move id="59">
+            <row>8</row>
+            <col>3</col>
+            <result>4</result>
+        </Move>
+        <Move id="60">
+            <row>6</row>
+            <col>8</col>
+            <result>4</result>
+        </Move>
+        <Move id="61">
+            <row>1</row>
+            <col>5</col>
+            <result>4</result>
+        </Move>
+        <Move id="62">
+            <row>7</row>
+            <col>7</col>
+            <result>4</result>
+        </Move>
+        <Move id="63">
+            <row>7</row>
+            <col>4</col>
+            <result>4</result>
+        </Move>
+        <Move id="64">
+            <row>4</row>
+            <col>7</col>
+            <result>4</result>
+        </Move>
+        <Move id="65">
+            <row>3</row>
+            <col>1</col>
+            <result>4</result>
+        </Move>
+        <Move id="66">
+            <row>2</row>
+            <col>4</col>
+            <result>4</result>
+        </Move>
+        <Move id="67">
+            <row>2</row>
+            <col>7</col>
+            <result>4</result>
+        </Move>
+        <Move id="68">
+            <row>5</row>
+            <col>6</col>
+            <result>4</result>
+        </Move>
+        <Move id="69">
+            <row>7</row>
+            <col>5</col>
+            <result>4</result>
+        </Move>
+        <Move id="70">
+            <row>7</row>
+            <col>1</col>
+            <result>4</result>
+        </Move>
+        <Move id="71">
+            <row>0</row>
+            <col>0</col>
+            <result>4</result>
+        </Move>
+        <Move id="72">
+            <row>6</row>
+            <col>1</col>
+            <result>4</result>
+        </Move>
+        <Move id="73">
+            <row>3</row>
+            <col>0</col>
+            <result>4</result>
+        </Move>
+        <Move id="74">
+            <row>4</row>
+            <col>3</col>
+            <result>4</result>
+        </Move>
+        <Move id="75">
+            <row>7</row>
+            <col>3</col>
+            <result>4</result>
+        </Move>
+        <Move id="76">
+            <row>8</row>
+            <col>9</col>
+            <result>4</result>
+        </Move>
+        <Move id="77">
+            <row>6</row>
+            <col>7</col>
+            <result>4</result>
+        </Move>
+        <Move id="78">
+            <row>0</row>
+            <col>7</col>
+            <result>4</result>
+        </Move>
+        <Move id="79">
+            <row>3</row>
+            <col>4</col>
+            <result>4</result>
+        </Move>
+        <Move id="80">
+            <row>3</row>
+            <col>5</col>
+            <result>4</result>
+        </Move>
+        <Move id="81">
+            <row>6</row>
+            <col>4</col>
+            <result>4</result>
+        </Move>
+        <Move id="82">
+            <row>8</row>
+            <col>2</col>
+            <result>4</result>
+        </Move>
+        <Move id="83">
+            <row>0</row>
+            <col>5</col>
+            <result>4</result>
+        </Move>
+        <Move id="84">
+            <row>0</row>
+            <col>6</col>
+            <result>4</result>
+        </Move>
+        <Move id="85">
+            <row>9</row>
+            <col>6</col>
+            <result>4</result>
+        </Move>
+        <Move id="86">
+            <row>8</row>
+            <col>4</col>
+            <result>4</result>
+        </Move>
+        <Move id="87">
+            <row>4</row>
+            <col>6</col>
+            <result>4</result>
+        </Move>
+        <Move id="88">
+            <row>2</row>
+            <col>8</col>
+            <result>4</result>
+        </Move>
+        <Move id="89">
+            <row>1</row>
+            <col>3</col>
+            <result>3</result>
+        </Move>
+        <Move id="90">
+            <row>9</row>
+            <col>3</col>
+            <result>2</result>
+        </Move>
+        <Move id="91">
+            <row>0</row>
+            <col>2</col>
+            <result>4</result>
+        </Move>
+        <Move id="92">
+            <row>3</row>
+            <col>6</col>
+            <result>4</result>
+        </Move>
+        <Move id="93">
+            <row>5</row>
+            <col>1</col>
+            <result>4</result>
+        </Move>
+        <Move id="94">
+            <row>9</row>
+            <col>7</col>
+            <result>4</result>
+        </Move>
+        <Move id="95">
+            <row>1</row>
+            <col>0</col>
+            <result>4</result>
+        </Move>
+        <Move id="96">
+            <row>6</row>
+            <col>6</col>
+            <result>4</result>
+        </Move>
+        <Move id="97">
+            <row>5</row>
+            <col>9</col>
+            <result>4</result>
+        </Move>
+        <Move id="98">
+            <row>1</row>
+            <col>1</col>
+            <result>3</result>
+        </Move>
+        <Move id="99">
+            <row>5</row>
+            <col>0</col>
+            <result>4</result>
+        </Move>
+        <Move id="100">
+            <row>9</row>
+            <col>1</col>
+            <result>3</result>
+        </Move>
+    </Moves>
+</Warship>
