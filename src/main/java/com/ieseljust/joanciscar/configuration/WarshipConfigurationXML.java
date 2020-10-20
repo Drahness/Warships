@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
@@ -14,6 +16,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -31,9 +34,8 @@ public class WarshipConfigurationXML extends WarshipAbstractFileConfiguration im
 	private Element element_moves;
 	private Element element_boats;
 	private Element element_root;
-
-	
-	private Document dom;
+	private List<Movement> movementsList;
+	private Document documentXML;
 
 	public static WarshipConfigurationXML getInstance() {
 		if (instance == null) {
@@ -72,31 +74,31 @@ public class WarshipConfigurationXML extends WarshipAbstractFileConfiguration im
 	@Override
 	public void setDefault() {
 		try {
-			dom = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-			element_root = dom.createElement("Warships");
-			dom.appendChild(element_root);
+			documentXML = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			element_root = documentXML.createElement("Warships");
+			documentXML.appendChild(element_root);
 			
 			
 			
-			configuracion = dom.createElement("Config");
-			element_moves = dom.createElement("Moves"); // Estos dos ultimos vacios. Solo cargas si se pide al usuario.
-			element_boats = dom.createElement("Boats");
+			configuracion = documentXML.createElement("Config");
+			element_moves = documentXML.createElement("Moves"); // Estos dos ultimos vacios. Solo cargas si se pide al usuario.
+			element_boats = documentXML.createElement("Boats");
 
 			element_root.appendChild(configuracion); // TODO hacerlo para que lo ponga cuando se vaya a guardar?
 			element_root.appendChild(element_moves);
 			element_root.appendChild(element_boats);
 
-			Element element_guardar_mov = dom.createElement(FlagsConfiguration.FLAG_GUARDAR_MOVIMIENTOS);
-			element_guardar_mov.appendChild(dom.createTextNode(Boolean.toString(DEFAULT_SAVE_MOVS)));
+			Element element_guardar_mov = documentXML.createElement(FlagsConfiguration.FLAG_GUARDAR_MOVIMIENTOS);
+			element_guardar_mov.appendChild(documentXML.createTextNode(Boolean.toString(DEFAULT_SAVE_MOVS)));
 			
-			Element element_max = dom.createElement(FlagsConfiguration.FLAG_MAX_JUGADAS);
-			element_max.appendChild(dom.createTextNode(Integer.toString(DEFAULT_TRIES)));
+			Element element_max = documentXML.createElement(FlagsConfiguration.FLAG_MAX_JUGADAS);
+			element_max.appendChild(documentXML.createTextNode(Integer.toString(DEFAULT_TRIES)));
 			
-			Element element_nboats = dom.createElement(FlagsConfiguration.FLAG_NUMERO_BOATS);
-			element_nboats.appendChild(dom.createTextNode(Integer.toString(DEFAULT_NUMBER_BOATS)));
+			Element element_nboats = documentXML.createElement(FlagsConfiguration.FLAG_NUMERO_BOATS);
+			element_nboats.appendChild(documentXML.createTextNode(Integer.toString(DEFAULT_NUMBER_BOATS)));
 			
-			Element element_bounds = dom.createElement(FlagsConfiguration.FLAG_TAMAÑO_BOARD);
-			element_bounds.appendChild(dom.createTextNode(Integer.toString(DEFAULT_BOUNDS)));
+			Element element_bounds = documentXML.createElement(FlagsConfiguration.FLAG_TAMAÑO_BOARD);
+			element_bounds.appendChild(documentXML.createTextNode(Integer.toString(DEFAULT_BOUNDS)));
 
 			configuracion.appendChild(element_guardar_mov);
 			configuracion.appendChild(element_max);
@@ -128,7 +130,7 @@ public class WarshipConfigurationXML extends WarshipAbstractFileConfiguration im
 
 	@Override
 	public void saveConfiguration() throws TransformerException, IOException, SAXException, ParserConfigurationException {
-		saveToXML(configuracion);
+		saveToXML();
 
 	}
 	@Override
@@ -182,10 +184,10 @@ public class WarshipConfigurationXML extends WarshipAbstractFileConfiguration im
 		Boat[] boats = b.getBoats();
 		
 		for (int i = 0; i < boats.length; i++) {
-			Element boat = dom.createElement(FlagsBoats.FLAG_BOAT);
-			Element dimension = dom.createElement(FlagsBoats.FLAG_DIMENSION);
-			Element posicion= dom.createElement(FlagsBoats.FLAG_POSICION);
-			Element orientacion = dom.createElement(FlagsBoats.FLAG_ORIENTACION);
+			Element boat = documentXML.createElement(FlagsBoats.FLAG_BOAT);
+			Element dimension = documentXML.createElement(FlagsBoats.FLAG_DIMENSION);
+			Element posicion= documentXML.createElement(FlagsBoats.FLAG_POSICION);
+			Element orientacion = documentXML.createElement(FlagsBoats.FLAG_ORIENTACION);
 			
 			dimension.setTextContent(boats[i].getDimension()+"");
 			orientacion.setTextContent(boats[i].getDireccion()+"");
@@ -200,41 +202,51 @@ public class WarshipConfigurationXML extends WarshipAbstractFileConfiguration im
 			element_boats.appendChild(boat);
 		}
 		
-		saveToXML(element_boats);
+		saveToXML();
 	}
 
 	@Override
 	public void saveMovements() throws TransformerException, IOException, SAXException, ParserConfigurationException {
-		saveToXML(element_moves);
+		saveToXML();
 	}
 
 	@Override
 	public void registerMovement(Movement m) {
-		Element move = dom.createElement(FlagsMovements.FLAG_MOVE);
+		for (int i = 0 ; i < movementsList.size(); i++ ) {
+			if(movementsList.get(i).equals(m)) {
+				movementsList.add(i, m);
+			}
+		}
+		Element move = documentXML.createElement(FlagsMovements.FLAG_MOVE);
 		move.setAttribute(FLAG_ATT_ID, String.valueOf(m.getId()));
 		
-		Element row = dom.createElement(FlagsMovements.FLAG_ROW);
-		row.appendChild(dom.createTextNode(String.valueOf(m.getFila())));
+		Element row = documentXML.createElement(FlagsMovements.FLAG_ROW);
+		row.appendChild(documentXML.createTextNode(String.valueOf(m.getFila())));
 		
-		Element col = dom.createElement(FlagsMovements.FLAG_COLUMN);
-		col.appendChild(dom.createTextNode(String.valueOf(m.getColumna())));
+		Element col = documentXML.createElement(FlagsMovements.FLAG_COLUMN);
+		col.appendChild(documentXML.createTextNode(String.valueOf(m.getColumna())));
 		
-		Element result = dom.createElement(FlagsMovements.FLAG_RESULT);
-		result.appendChild(dom.createTextNode(String.valueOf(m.getResultado())));
+		Element result = documentXML.createElement(FlagsMovements.FLAG_RESULT);
+		result.appendChild(documentXML.createTextNode(String.valueOf(m.getResultado())));
 		
 		move.appendChild(row);
 		move.appendChild(col);
 		move.appendChild(result);
 		
-		element_moves.appendChild(move);
+		documentXML.getElementsByTagName(FlagsMovements.FLAG_ROOT).item(0).appendChild(move);
 	}
 
 	@Override
 	public void resetMovs() {
-		NodeList list = element_moves.getElementsByTagName(FlagsMovements.FLAG_MOVE);
-		for (int i = 0; i < list.getLength(); i++) {
+		Node moves = documentXML.getElementsByTagName(FlagsMovements.FLAG_ROOT).item(0);
+		/*for (int i = 0; i < list.getLength(); i++) {
 			element_moves.removeChild(list.item(i));
-		}
+		}*/
+		Node parent = moves.getParentNode();
+		parent.removeChild(moves);
+		element_moves = documentXML.createElement(FlagsMovements.FLAG_ROOT);
+		parent.appendChild(element_moves);
+
 	}
 
 	@Override
@@ -301,9 +313,9 @@ public class WarshipConfigurationXML extends WarshipAbstractFileConfiguration im
 		return board;
 	}
 
-	private void saveToXML(Element toAppend) throws TransformerException, FileNotFoundException, IOException, SAXException, ParserConfigurationException {
+	private void saveToXML() throws TransformerException, FileNotFoundException, IOException, SAXException, ParserConfigurationException {
 		DOMSource source;
-		source = new DOMSource(dom);
+		source = new DOMSource(documentXML);
 		StreamResult result = new StreamResult(new FileOutputStream(getFileConf()));
 		Transformer trans = TransformerFactory.newInstance().newTransformer();
 		trans.transform(source, result);

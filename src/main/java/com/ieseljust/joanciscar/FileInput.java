@@ -38,7 +38,6 @@ public class FileInput implements IWarshipInput {
 	}
 	@Override
 	public IWarshipInput returnInput() {
-		System.out.println(movements.length + " leeegngh");
 		if (counter/2 < movements.length) {
 			return this;
 		}

@@ -70,46 +70,39 @@ public class WarshipMain {
 			break;
 		case 1:
 			try {
-				try {
-					board = new Board(loader.loadBoats());
-				} catch (SAXException | ParserConfigurationException e) {
-					System.out.println("Error al parsear el fichero.");
-					e.printStackTrace();
-				}
+				board = new Board(loader.loadBoats());
 			} catch (NumberFormatException e) {
 				System.out.println(ConsoleColors.printError("Fichero mal-formado."));
-				e.printStackTrace();
-			} catch (IOException e) {
-				System.out.println(ConsoleColors.printError("Error al leer el fichero."));
 				e.printStackTrace();
 			} catch(IllegalArgumentException e) {
 				System.out.println(ConsoleColors.printError("El tamaño por defecto no permite este guardado de barcos, quieres crear un tablero que encaje con el guardado?"));
 				if(Leer.leerBoolean("Si o no: ")) {
 					try {
-						try {
-							board = loader.loadBoardSafe();
-						} catch (SAXException | ParserConfigurationException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
+						board = loader.loadBoardSafe();
 					} catch (IOException | NumberFormatException e1 ) {
 						System.out.println(ConsoleColors.printError("Error al leer el fichero."));
+					} catch (SAXException | ParserConfigurationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 				}
-			}
+			} catch (IOException e) {
+				System.out.println(ConsoleColors.printError("Error al leer el fichero."));
+				e.printStackTrace();
+			} catch (SAXException | ParserConfigurationException e) {
+				System.out.println("Error al parsear el fichero.");
+				e.printStackTrace();
+			} 
+			
 			break;
 		default:
 			try {
-				try {
-					persistor.saveBoats(board);
-				} catch (SAXException | ParserConfigurationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				
+				persistor.saveBoats(board);				
 			} catch (IOException | TransformerException e) {
 				System.out.println("Error al guardar el fichero.");
+				//e.printStackTrace();
+			} catch (SAXException | ParserConfigurationException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -131,26 +124,22 @@ public class WarshipMain {
 			break;
 		case 2:
 			try {
-				try {
-					configuration.saveConfiguration();
-				} catch (SAXException | ParserConfigurationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				configuration.saveConfiguration();
 			} catch (IOException | TransformerException e1) {
 				System.out.println(ConsoleColors.printError("Error al guardar el fichero de propiedades."));
 				e1.printStackTrace();
+			} catch (SAXException | ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			break;
 		case 3:
 			try {
-				try {
-					configuration.loadConfiguration();
-				} catch (SAXException | ParserConfigurationException e) {
-				
-				}
+				configuration.loadConfiguration();
 			} catch (IOException e) {
 				System.out.println(ConsoleColors.printError("Error al cargar el fichero de configuracion."));
+			} catch (SAXException | ParserConfigurationException e) {
+				e.printStackTrace();
 			}
 			break;
 		default:
@@ -190,6 +179,9 @@ public class WarshipMain {
 			int jugadas = 0;
 			boolean seguir = true;
 			do {
+				boolean store = input.needsToBeStored();
+				boolean ai = input.isAI();
+				
 				System.out.println("JUGADA: " + ++jugadas);
 				int columna = input.getCoord();
 				if(columna == -1) {
@@ -208,14 +200,14 @@ public class WarshipMain {
 					System.out.println("(" + fila + "," + columna + ") --> AGUA");
 				}
 				movement = new Movement(jugadas,fila,columna, resultado);
-				if(input.needsToBeStored()) {
+				if(store) {
 					persistor.registerMovement(movement);
 				}
-				if(board.getEnd_Game() && !input.isAI()) {
+				if(board.getEnd_Game() && !ai) {
 					System.out.println(ConsoleColors.printString("¡Has ganado!", ConsoleColors.GREEN_BOLD_BRIGHT));
 					seguir = false;
 				}
-				if(input.isAI() && !(jugadas < configuration.getCurrentMaxJugadas())) {
+				if(ai && !(jugadas < configuration.getCurrentMaxJugadas())) {
 					seguir = false;
 				}
 			} while(seguir);
@@ -223,14 +215,12 @@ public class WarshipMain {
 			
 			if(configuration.getCurrentGuardarMovimientos()) {
 				try {
-					try {
-						persistor.saveMovements();
-					} catch (SAXException | ParserConfigurationException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					persistor.saveMovements();
 				} catch (IOException | TransformerException e) {
 					System.out.println(ConsoleColors.printError("Ha habido un error guardando el fichero de movimientos."));
+					e.printStackTrace();
+				} catch (SAXException | ParserConfigurationException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
