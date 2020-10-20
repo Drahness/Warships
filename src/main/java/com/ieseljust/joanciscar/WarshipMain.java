@@ -11,9 +11,13 @@ import org.xml.sax.SAXException;
 
 import com.ieseljust.joanciscar.configuration.IConfiguration;
 import com.ieseljust.joanciscar.configuration.WarshipConfigurationJSON;
+import com.ieseljust.joanciscar.configuration.WarshipConfigurationProperties;
 import com.ieseljust.joanciscar.configuration.WarshipConfigurationXML;
 import com.ieseljust.joanciscar.io.ILoader;
 import com.ieseljust.joanciscar.io.IPersistor;
+import com.ieseljust.joanciscar.io.WarshipLoader;
+import com.ieseljust.joanciscar.io.WarshipPersistor;
+
 import Utils.ConsoleColors;
 import Utils.Leer;
 import pkg2020_ad_p1_warship.Board;
@@ -25,18 +29,54 @@ public class WarshipMain {
 	public static final WarshipPersistor persistor = WarshipPersistor.getInstance();*/
 	
 	
-	public static final IConfiguration configuration = WarshipConfigurationJSON.getInstance();
-	public static final ILoader loader = WarshipConfigurationJSON.getInstance();
-	public static final IPersistor persistor = WarshipConfigurationJSON.getInstance();
+	public static IConfiguration configuration;
+	public static ILoader loader;
+	public static IPersistor persistor;
 	
 	public static Board board;
 	public static IWarshipInput input;
 	
 	public static void main(String[] args) throws IOException {
-		
+		try {
+			if(args[0].equalsIgnoreCase("xml")) {
+				setXML();
+			}
+			else if(args[0].equalsIgnoreCase("file")) {
+				setFILE();
+			}
+			else if(args[0].equalsIgnoreCase("json")) {
+				setJSON();
+			}
+		} catch(ArrayIndexOutOfBoundsException e) {
+			setJSON();
+		}
 		while(true) {
 			menuPrincipal();
 		}
+	}
+	/**
+	 * Modo JSON, leera y escribira en un JSON
+	 */
+	public static void setJSON() {
+		configuration = WarshipConfigurationJSON.getInstance();
+		loader = WarshipConfigurationJSON.getInstance();
+		persistor = WarshipConfigurationJSON.getInstance();
+	}
+	/**
+	 * Modo XML
+	 */
+	public static void setXML() {
+		configuration = WarshipConfigurationXML.getInstance();
+		loader = WarshipConfigurationXML.getInstance();
+		persistor = WarshipConfigurationXML.getInstance();
+	}
+	/**
+	 * Modo fichero, lee y escribe en DISTINTOS FICHEROS.
+	 */
+	public static void setFILE() {
+		configuration = WarshipConfigurationProperties.getInstance();
+		loader = WarshipLoader.getInstance();
+		persistor = WarshipPersistor.getInstance();
 	}
 	public static void menuPrincipal() {
 		System.out.println("Juego Warships:");
@@ -109,7 +149,13 @@ public class WarshipMain {
 			break;
 		default:
 			try {
-				persistor.saveBoats(board);				
+				if(board != null) {
+					persistor.saveBoats(board);
+				}
+				else {
+					System.out.println(ConsoleColors.printError("Inicializa un tablero."));
+				}
+				
 			} catch (IOException | TransformerException e) {
 				System.out.println("Error al guardar el fichero.");
 				//e.printStackTrace();

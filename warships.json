@@ -1,1 +1,6 @@
-{"Warship": {"Moves": []}}
+{"Warship": {"Config": {
+    "board_tam": 10,
+    "max_jugadas": 50,
+    "num_boats": 5,
+    "save_movements": true
+}}}

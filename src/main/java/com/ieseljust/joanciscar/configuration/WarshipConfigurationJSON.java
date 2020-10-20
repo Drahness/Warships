@@ -23,18 +23,18 @@ import com.ieseljust.joanciscar.io.IPersistor;
 import pkg2020_ad_p1_warship.Board;
 import pkg2020_ad_p1_warship.Boat;
 
-public class WarshipConfigurationJSON extends WarshipAbstractFileConfiguration implements ILoader, IPersistor{
+public class WarshipConfigurationJSON extends WarshipAbstractFileConfiguration implements ILoader, IPersistor {
 	private static WarshipConfigurationJSON instance;
-	
+
 	public static WarshipConfigurationJSON getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new WarshipConfigurationJSON("warships.json");
 		}
 		return instance;
 	}
-	
+
 	private JSONObject json;
-	
+
 	public WarshipConfigurationJSON(String file) {
 		super(new File(file));
 		try {
@@ -46,14 +46,14 @@ public class WarshipConfigurationJSON extends WarshipAbstractFileConfiguration i
 
 	@Override
 	public void loadConfiguration() throws JSONException, IOException {
-		
+
 		JSONObject configuration = getRoot(readFile()).getJSONObject(FlagsConfiguration.FLAG_ROOT);
-		
+
 		int max = configuration.getInt(FlagsConfiguration.FLAG_MAX_JUGADAS);
 		int boats = configuration.getInt(FlagsConfiguration.FLAG_NUMERO_BOATS);
 		int bounds = configuration.getInt(FlagsConfiguration.FLAG_TAMAÑO_BOARD);
 		boolean save = configuration.getBoolean(FlagsConfiguration.FLAG_GUARDAR_MOVIMIENTOS);
-		
+
 		setCurrentBoats(boats);
 		setCurrentGuardarMovimientos(save);
 		setCurrentMaxJugadas(max);
@@ -68,7 +68,7 @@ public class WarshipConfigurationJSON extends WarshipAbstractFileConfiguration i
 				.put(FlagsConfiguration.FLAG_NUMERO_BOATS, getCurrentBoats())
 				.put(FlagsConfiguration.FLAG_MAX_JUGADAS, getCurrentMaxJugadas())
 				.put(FlagsConfiguration.FLAG_TAMAÑO_BOARD, getCurrentBounds());
-		
+
 		getRoot().put(FlagsConfiguration.FLAG_ROOT, configuration);
 		saveToFile();
 	}
@@ -79,13 +79,11 @@ public class WarshipConfigurationJSON extends WarshipAbstractFileConfiguration i
 		Boat[] boats = b.getBoats();
 		JSONArray array = new JSONArray();
 		for (int i = 0; i < boats.length; i++) {
-			JSONObject boat = new JSONObject().put(FlagsBoats.FLAG_BOAT
-					, new JSONObject()
-						.put(FLAG_ATT_ID, i)
-						.put(FlagsBoats.FLAG_ATT_COL_POSICION, boats[i].getColumnapos())
-						.put(FlagsBoats.FLAG_ATT_ROW_POSICION, boats[i].getFilapos())
-						.put(FlagsBoats.FLAG_DIMENSION, boats[i].getDimension())
-						.put(FlagsBoats.FLAG_ORIENTACION, boats[i].getDireccion()));
+			JSONObject boat = new JSONObject().put(FlagsBoats.FLAG_BOAT,
+					new JSONObject().put(FLAG_ATT_ID, i).put(FlagsBoats.FLAG_ATT_COL_POSICION, boats[i].getColumnapos())
+							.put(FlagsBoats.FLAG_ATT_ROW_POSICION, boats[i].getFilapos())
+							.put(FlagsBoats.FLAG_DIMENSION, boats[i].getDimension())
+							.put(FlagsBoats.FLAG_ORIENTACION, boats[i].getDireccion()));
 			array.put(boat);
 		}
 		getRoot().put(FlagsBoats.FLAG_ROOT, array);
@@ -97,12 +95,10 @@ public class WarshipConfigurationJSON extends WarshipAbstractFileConfiguration i
 		List<Movement> movs = getMovements();
 		JSONArray array = new JSONArray();
 		for (int i = 0; i < movs.size(); i++) {
-			JSONObject moves = new JSONObject().put(FlagsMovements.FLAG_MOVE
-					,new JSONObject()
-						.put(FLAG_ATT_ID, i)
-						.put(FlagsMovements.FLAG_COLUMN, movs.get(i).getColumna())
-						.put(FlagsMovements.FLAG_ROW, movs.get(i).getFila())
-						.put(FlagsMovements.FLAG_RESULT, movs.get(i).getResultado()) );
+			JSONObject moves = new JSONObject().put(FlagsMovements.FLAG_MOVE,
+					new JSONObject().put(FLAG_ATT_ID, i).put(FlagsMovements.FLAG_COLUMN, movs.get(i).getColumna())
+							.put(FlagsMovements.FLAG_ROW, movs.get(i).getFila())
+							.put(FlagsMovements.FLAG_RESULT, movs.get(i).getResultado()));
 			array.put(moves);
 		}
 		getRoot().put(FlagsMovements.FLAG_ROOT, array);
@@ -111,20 +107,20 @@ public class WarshipConfigurationJSON extends WarshipAbstractFileConfiguration i
 
 	@Override
 	public void registerMovement(Movement m) {
-		if(getMovements().contains(m)) {
-			for (int i = 0 ; i < getMovements().size(); i++ ) {
-				if(!getMovements().get(i).equals(m)) {
+		if (getMovements().contains(m)) {
+			for (int i = 0; i < getMovements().size(); i++) {
+				if (!getMovements().get(i).equals(m)) {
 					getMovements().add(i, m);
 				}
 			}
-		}
-		else {
+		} else {
 			getMovements().add(m);
 		}
 	}
 
 	@Override
-	public void resetMovs() {}
+	public void resetMovs() {
+	}
 
 	@Override
 	public Movement[] loadMovements() throws JSONException, IOException {
@@ -133,29 +129,27 @@ public class WarshipConfigurationJSON extends WarshipAbstractFileConfiguration i
 		Movement[] movs = new Movement[leng];
 		for (int i = 0; i < leng; i++) {
 			JSONObject jsonmov = movements.getJSONObject(i).getJSONObject(FlagsMovements.FLAG_MOVE);
-			Movement movement = new Movement(jsonmov.getInt(FLAG_ATT_ID)
-					,jsonmov.getInt(FlagsMovements.FLAG_ROW)
-					,jsonmov.getInt(FlagsMovements.FLAG_COLUMN)
-					,jsonmov.getInt(FlagsMovements.FLAG_RESULT));
+			Movement movement = new Movement(jsonmov.getInt(FLAG_ATT_ID), jsonmov.getInt(FlagsMovements.FLAG_ROW),
+					jsonmov.getInt(FlagsMovements.FLAG_COLUMN), jsonmov.getInt(FlagsMovements.FLAG_RESULT));
 			movs[i] = movement;
 		}
+		getRoot().put(FlagsMovements.FLAG_ROOT,movements);
 		return movs;
 	}
 
 	@Override
 	public Boat[] loadBoats() throws JSONException, IOException {
-		JSONArray movements = getRoot(readFile()).getJSONArray(FlagsBoats.FLAG_ROOT);
-		int leng = movements.length();
+		JSONArray boats = getRoot(readFile()).getJSONArray(FlagsBoats.FLAG_ROOT);
+		int leng = boats.length();
 		Boat[] movs = new Boat[leng];
 		for (int i = 0; i < leng; i++) {
-			JSONObject jsonmov = movements.getJSONObject(i).getJSONObject(FlagsBoats.FLAG_BOAT);
-			Boat boat = new Boat(jsonmov.getInt(FlagsBoats.FLAG_DIMENSION)
-								,jsonmov.getInt(FlagsBoats.FLAG_ORIENTACION)
-								,jsonmov.getInt(FlagsBoats.FLAG_ATT_ROW_POSICION)
-								,jsonmov.getInt(FlagsBoats.FLAG_ATT_COL_POSICION)
-								,jsonmov.getInt(FLAG_ATT_ID));
-			movs[i] = boat;			
+			JSONObject jsonmov = boats.getJSONObject(i).getJSONObject(FlagsBoats.FLAG_BOAT);
+			Boat boat = new Boat(jsonmov.getInt(FlagsBoats.FLAG_DIMENSION), jsonmov.getInt(FlagsBoats.FLAG_ORIENTACION),
+					jsonmov.getInt(FlagsBoats.FLAG_ATT_ROW_POSICION), jsonmov.getInt(FlagsBoats.FLAG_ATT_COL_POSICION),
+					jsonmov.getInt(FLAG_ATT_ID));
+			movs[i] = boat;
 		}
+		getRoot().put(FlagsBoats.FLAG_ROOT, boats);
 		return movs;
 	}
 
@@ -166,27 +160,32 @@ public class WarshipConfigurationJSON extends WarshipAbstractFileConfiguration i
 		Board board = new Board(boats);
 		return board;
 	}
+
 	private void saveToFile(JSONObject o) throws IOException, JSONException {
 		FileWriter fw = new FileWriter(getFileConf());
 		fw.write(o.toString(4));
 		fw.close();
 	}
+
 	private void saveToFile() throws IOException, JSONException {
 		saveToFile(json);
 	}
-	
+
 	private JSONObject readFile() throws IOException, JSONException {
 		FileReader fr = new FileReader(getFileConf());
 		String json = "";
 		int ch;
-		while((ch = fr.read()) != -1)  {
+		while ((ch = fr.read()) != -1) {
 			json += (char) ch;
 		}
 		fr.close();
 		return new JSONObject(json);
 	}
+
 	/**
-	 * To get the root of the json. Where is the roots of configuration/boats/moves with a JSONObject
+	 * To get the root of the json. Where is the roots of configuration/boats/moves
+	 * with a JSONObject
+	 * 
 	 * @return
 	 */
 	private JSONObject getRoot(JSONObject o) {
@@ -197,8 +196,10 @@ public class WarshipConfigurationJSON extends WarshipAbstractFileConfiguration i
 			return null;
 		}
 	}
+
 	/**
 	 * To get the root of the json. Where is the roots of configuration/boats/moves
+	 * 
 	 * @return
 	 */
 	private JSONObject getRoot() {
